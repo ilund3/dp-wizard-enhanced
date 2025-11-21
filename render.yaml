@@ -2,6 +2,7 @@ services:
   - type: web
     name: dp-wizard-enhanced
     env: python
+<<<<<<< HEAD
     region: oregon
     plan: free
     buildCommand: pip install -r requirements.txt && pip install -e .
@@ -15,4 +16,12 @@ services:
         value: false
       # PORT is automatically set by Render, don't override it
     healthCheckPath: /
+=======
+    plan: free
+    buildCommand: pip install -e ".[app]"
+    startCommand: python3 run.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+>>>>>>> 67e1cdeec38e1add4900053c7b7d2459e0ab12b0
 

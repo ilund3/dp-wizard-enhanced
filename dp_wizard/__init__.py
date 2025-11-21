@@ -1,5 +1,6 @@
 """DP Wizard makes it easier to get started with Differential Privacy."""
 
+import os
 from pathlib import Path
 from logging import warning
 
@@ -32,6 +33,7 @@ def main():  # pragma: no cover
         warning("└──────────────────────────────────┘")
         not_first_run_path.touch()
 
+<<<<<<< HEAD
     # In production (e.g., Fly.io), use environment variables for host/port
     # In development, use defaults with browser launch
     import os
@@ -40,6 +42,17 @@ def main():  # pragma: no cover
     launch_browser = os.getenv("LAUNCH_BROWSER", "true").lower() == "true"
     reload = os.getenv("RELOAD", "true").lower() == "true"
     
+=======
+    # Get port from environment variable (for production) or default to 8000
+    port = int(os.environ.get("PORT", 8000))
+    # Bind to 0.0.0.0 for production deployment (Render, etc.)
+    # Use localhost for local development
+    host = "0.0.0.0" if os.environ.get("PORT") else "127.0.0.1"
+    # Disable browser launch and reload in production
+    launch_browser = not bool(os.environ.get("PORT"))
+    reload = not bool(os.environ.get("PORT"))
+
+>>>>>>> 67e1cdeec38e1add4900053c7b7d2459e0ab12b0
     shiny.run_app(
         app="dp_wizard.app",
         host=host,
