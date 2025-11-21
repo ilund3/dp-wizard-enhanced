@@ -16,6 +16,7 @@ DP Wizard Enhanced is a Python Shiny web application that requires a server to r
 
 **Recommended: Configure directly in Render Dashboard**
 
+If you're getting errors with `render.yaml`, configure the service manually in the Render dashboard:
 
 1. **Push your code to GitHub** (if not already done)
 
