@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: pip install -e ".[app]"
-    startCommand: python run.py
+    startCommand: python3 run.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0

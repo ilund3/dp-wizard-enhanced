@@ -14,6 +14,9 @@ DP Wizard Enhanced is a Python Shiny web application that requires a server to r
 
 ### Deploying to Render
 
+**Recommended: Configure directly in Render Dashboard**
+
+
 1. **Push your code to GitHub** (if not already done)
 
 2. **Sign up/Login to Render** at https://render.com
@@ -23,16 +26,24 @@ DP Wizard Enhanced is a Python Shiny web application that requires a server to r
    - Connect your GitHub repository
    - Select the repository: `dp-wizard-enhanced`
 
-4. **Configure the service**:
+4. **Configure the service** (IMPORTANT - set these manually):
    - **Name**: `dp-wizard-enhanced` (or your preferred name)
    - **Environment**: `Python 3`
+   - **Root Directory**: Leave blank (or set to `.` if needed)
    - **Build Command**: `pip install -e ".[app]"`
    - **Start Command**: `python run.py`
    - **Plan**: Free (or paid for production)
    
-   **Note**: If you're using the `render.yaml` file, these settings are already configured.
+   **Note**: Make sure to set the Start Command to exactly: `python run.py`
 
 5. **Deploy**: Click "Create Web Service"
+
+**Alternative: Using render.yaml**
+
+If you want to use `render.yaml`:
+1. Make sure `render.yaml` is in your repository root
+2. When creating the service, Render should auto-detect it
+3. **If you see errors like "run: command not found"**, delete the service and recreate it using Option 1 above (manual configuration)
 
    Render will automatically:
    - Install dependencies
