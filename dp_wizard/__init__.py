@@ -32,8 +32,18 @@ def main():  # pragma: no cover
         warning("└──────────────────────────────────┘")
         not_first_run_path.touch()
 
+    # In production (e.g., Fly.io), use environment variables for host/port
+    # In development, use defaults with browser launch
+    import os
+    host = os.getenv("HOST", "127.0.0.1")
+    port = int(os.getenv("PORT", "8000"))
+    launch_browser = os.getenv("LAUNCH_BROWSER", "true").lower() == "true"
+    reload = os.getenv("RELOAD", "true").lower() == "true"
+    
     shiny.run_app(
         app="dp_wizard.app",
-        launch_browser=True,
-        reload=True,
+        host=host,
+        port=port,
+        launch_browser=launch_browser,
+        reload=reload,
     )

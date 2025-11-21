@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: dp-wizard-enhanced
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r requirements.txt && pip install -e .
+    startCommand: python render_start.py
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: LAUNCH_BROWSER
+        value: false
+      - key: RELOAD
+        value: false
+      # PORT is automatically set by Render, don't override it
+    healthCheckPath: /
+

@@ -1,0 +1,29 @@
+# Fly.io app configuration file
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+
+app = "dp-wizard-enhanced"
+primary_region = "iad"
+
+[build]
+
+[env]
+  PORT = "8000"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "30s"
+  method = "GET"
+  timeout = "5s"
+  path = "/"
+
+[processes]
+  app = "python -m dp_wizard --demo"
+
