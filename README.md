@@ -43,16 +43,11 @@ Run DP Wizard locally in just a few steps:
    
    Then upload your CSV file through the web interface.
 
-### Demo Video
+### Demo
 
 See DP Wizard in action:
 
-<video width="100%" controls>
-  <source src="assets/DP-Demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
-[Watch Demo Video](assets/DP-Demo.mp4) (direct link)
+![DP Wizard Demo](assets/DP-Demo.gif)
 
 ## Usage
 
