@@ -18,6 +18,42 @@ Output options include:
 - A plain Python script.
 - Text and CSV reports.
 
+## Quick Start
+
+### Try It Yourself
+
+Run DP Wizard locally in just a few steps:
+
+1. **Install DP Wizard:**
+   ```bash
+   pip install dp_wizard[app]
+   ```
+
+2. **Run the demo:**
+   ```bash
+   dp-wizard --demo
+   ```
+
+   Your browser will automatically open to `http://localhost:8000` where you can explore the application with sample data.
+
+3. **Or use your own data:**
+   ```bash
+   dp-wizard
+   ```
+   
+   Then upload your CSV file through the web interface.
+
+### Demo Video
+
+See DP Wizard in action:
+
+<video width="100%" controls>
+  <source src="assets/DP-Demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+[Watch Demo Video](assets/DP-Demo.mp4) (direct link)
+
 ## Usage
 
 DP Wizard requires Python 3.10 or later.
