@@ -1,59 +1,88 @@
-# DP Wizard
+# DP Wizard Enhanced
 
 [![pypi](https://img.shields.io/pypi/v/dp_wizard)](https://pypi.org/project/dp_wizard/)
 
-Building on what we've learned from [DP Creator](https://github.com/opendp/dpcreator), DP Wizard offers:
+An enhanced version of DP Wizard that makes it easier to get started with Differential Privacy.
 
-- Easy installation with `pip install dp_wizard[app]`
-- Simplified single-user application design
-- Streamlined workflow that doesn't assume familiarity with differential privacy
-- Interactive visualization of privacy budget choices
-- UI development in Python with [Shiny](https://shiny.posit.co/py/)
+![DP Wizard Enhanced Demo](assets/DP-Demo.gif)
 
-DP Wizard guides the user through the application of differential privacy.
-After selecting a local CSV, users are prompted to describe the analysis they need.
-Output options include:
+## What is DP Wizard?
 
-- A Jupyter notebook which demonstrates how to use [OpenDP](https://docs.opendp.org/).
-- A plain Python script.
-- Text and CSV reports.
+DP Wizard guides you through the application of differential privacy. After selecting a local CSV, you're prompted to describe the analysis you need. The tool generates:
+
+- **Jupyter notebooks** demonstrating how to use [OpenDP](https://docs.opendp.org/)
+- **Plain Python scripts** ready to run
+- **Text and CSV reports** with your differentially private results
+
+Building on what we've learned from [DP Creator](https://github.com/opendp/dpcreator), DP Wizard Enhanced offers:
+
+- ✅ Easy installation with `pip install dp_wizard[app]`
+- ✅ Simplified single-user application design
+- ✅ Streamlined workflow that doesn't assume familiarity with differential privacy
+- ✅ Interactive visualization of privacy budget choices
+- ✅ Modern UI built with Python [Shiny](https://shiny.posit.co/py/)
 
 ## Quick Start
 
-### Try It Yourself
+### Installation
 
-Run DP Wizard locally in just a few steps:
+DP Wizard requires **Python 3.10 or later**. Check your version:
 
-1. **Install DP Wizard:**
-   ```bash
-   pip install dp_wizard[app]
-   ```
+```bash
+python --version
+```
 
-2. **Run the demo:**
-   ```bash
-   dp-wizard --demo
-   ```
+If you need to upgrade, the process depends on your operating system. Once you have Python 3.10+, install DP Wizard:
 
-   Your browser will automatically open to `http://localhost:8000` where you can explore the application with sample data.
+```bash
+pip install dp_wizard[app]
+```
 
-3. **Or use your own data:**
-   ```bash
-   dp-wizard
-   ```
-   
-   Then upload your CSV file through the web interface.
+> **Note**: The `[app]` extra ensures all dependencies are pinned for reliable application use. If you're using `dp_wizard` as a library, you can install without it: `pip install dp_wizard`
 
-### Demo
+### Running the Application
 
-See DP Wizard in action:
+#### Option 1: Try the Demo (Recommended for First-Time Users)
 
-![DP Wizard Demo](assets/DP-Demo.gif)
+Run DP Wizard with sample data to see how it works:
+
+```bash
+dp-wizard --demo
+```
+
+Your browser will automatically open to `http://localhost:8000` where you can explore the application with pre-loaded sample data.
+
+#### Option 2: Use Your Own Data
+
+Run DP Wizard and upload your CSV file:
+
+```bash
+dp-wizard
+```
+
+Then upload your CSV file through the web interface.
+
+#### Option 3: Manual Column Entry (No File Upload)
+
+If you prefer to enter column names manually:
+
+```bash
+dp-wizard --no_uploads
+```
+
+### Understanding CSV Options
+
+DP Wizard supports different CSV configurations depending on your use case:
+
+- **Public CSV**: If you have a public dataset and want to see how DP can be applied. Preview visualizations will use your public data.
+
+- **Private CSV**: If you only have a private dataset and want to make a release from it. Preview visualizations will use simulated data, and the private CSV is not read until the actual release.
+
+- **Both Public and Private**: If you have two CSVs with the same structure (e.g., the public CSV is older and no longer sensitive). Preview visualizations use the public data, but the release is made with private data.
 
 ## Usage
 
-DP Wizard requires Python 3.10 or later.
-You can check your current version with `python --version`.
-The exact upgrade process will depend on your environment and operating system.
+### Command Line Options
 
 ```
 usage: dp-wizard [-h] [--demo | --no_uploads]
@@ -64,149 +93,144 @@ options:
   -h, --help    show this help message and exit
   --demo        Use generated fake CSV for a quick demo
   --no_uploads  Prompt for column names instead of CSV upload
-
-Unless you have set "--demo" or "--no_uploads", you will specify a CSV
-inside the application.
-
-Provide a "Public CSV" if you have a public data set, and are curious how
-DP can be applied: The preview visualizations will use your public data.
-
-Provide a "Private CSV" if you only have a private data set, and want to
-make a release from it: The preview visualizations will only use
-simulated data, and apart from the headers, the private CSV is not
-read until the release.
-
-Provide both if you have two CSVs with the same structure.
-Perhaps the public CSV is older and no longer sensitive. Preview
-visualizations will be made with the public data, but the release will
-be made with private data.
 ```
 
+### Workflow
 
-## Contributions
+1. **Start the application** using one of the methods above
+2. **Upload or specify your data** (CSV file or column names)
+3. **Configure your analysis** by selecting:
+   - Column(s) to analyze
+   - Analysis type (count, mean, median, histogram, etc.)
+   - Privacy parameters (epsilon, bounds, etc.)
+4. **Generate outputs**:
+   - Download Jupyter notebook with OpenDP code
+   - Download Python script
+   - View text and CSV reports
 
-There are several ways to contribute. First, if you find DP Wizard useful, please [let us know](https://docs.google.com/forms/d/e/1FAIpQLScaGdKS-vj-RrM7SCV_lAwZmxQ2bOqFrAkyDp4djxTqkTkinA/viewform) and we'll spend more time on this project. If DP Wizard doesn't work for you, we also want to know that! Please [file an issue](https://github.com/opendp/dp-wizard/issues/new/choose) and we'll look into it.
+## Documentation
 
-We also welcome PRs, but if you have an idea for a new feature, it may be helpful to get in touch before you begin, to make sure your idea is in line with our vision:
-- The DP Wizard codebase shouldn't actually contain any differential privacy algorithms. This project is a thin wrapper around the [OpenDP library](https://github.com/opendp/opendp/), and that's where new algorithms should be added.
-- DP Wizard isn't trying to do everything: The OpenDP library is rich, and DP Wizard exposes only a fraction of that functionality so the user isn't overwhelmed by details.
-- DP Wizard tries to model the correct application of differential privacy. For example, while comparing DP results and unnoised statistics can be useful for education, that's not something this application will offer.
+### For Users
 
-With those caveats in mind, feel free to [file a feature request](https://github.com/opendp/dp-wizard/issues/new/choose), or chat with us at our [online office hour](https://harvard.zoom.us/j/98058847683), usually Tuesdays and Thursdays at 11am Eastern.
+- **Getting Started**: Follow the [Quick Start](#quick-start) guide above
+- **Understanding Differential Privacy**: Check out the [OpenDP documentation](https://docs.opendp.org/)
+- **Troubleshooting**: [File an issue](https://github.com/opendp/dp-wizard/issues/new/choose) if you encounter problems
 
-## Development
+### For Developers
 
-This is the first project we've developed with Python Shiny,
-so let's remember [what we learned](WHAT-WE-LEARNED.md) along the way.
+If you want to contribute or modify DP Wizard Enhanced:
 
-### Getting Started
+#### Development Setup
 
-DP-Wizard will run across multiple Python versions, but for the fewest surprises during development, it makes sense to use the oldest supported version in a virtual environment. On MacOS:
-```shell
-$ git clone https://github.com/opendp/dp-wizard.git
-$ cd dp-wizard
-$ brew install python@3.10
-$ python3.10 -m venv .venv
-$ source .venv/bin/activate
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/ilund3/dp-wizard-enhanced.git
+   cd dp-wizard-enhanced
+   ```
+
+2. **Set up a virtual environment** (recommended):
+   ```bash
+   python3.10 -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+3. **Install development dependencies:**
+   ```bash
+   pip install -r requirements-dev.txt
+   pre-commit install
+   playwright install
+   ```
+
+4. **Install the package in editable mode:**
+   ```bash
+   pip install --editable .
+   ```
+
+5. **Run the application:**
+   ```bash
+   dp-wizard --demo
+   ```
+
+#### Testing
+
+Run the test suite:
+
+```bash
+./ci.sh
 ```
 
-You can now install dependencies, and the application itself, and start a demo:
-```shell
-$ pip install -r requirements-dev.txt
-$ pre-commit install
-$ playwright install
-$ pip install --editable .
-$ dp-wizard --demo
-```
+We use [Playwright](https://playwright.dev/python/) for end-to-end tests. You can:
 
-Your browser should open and connect you to the application.
+- **Generate test code** by interacting with the app:
+  ```bash
+  dp-wizard  # Keep this running
+  playwright codegen http://127.0.0.1:8000/  # In another terminal
+  ```
 
-### Testing
+- **Debug tests** step-by-step:
+  ```bash
+  PWDEBUG=1 pytest -k test_app
+  ```
 
-Tests should pass, and code coverage should be complete (except blocks we explicitly ignore):
-```shell
-$ ./ci.sh
-```
+#### Project Structure
 
-We're using [Playwright](https://playwright.dev/python/) for end-to-end tests. You can use it to [generate test code](https://playwright.dev/python/docs/codegen-intro) just by interacting with the app in a browser:
-```shell
-$ dp-wizard # The server will continue to run, so open a new terminal to continue.
-$ playwright codegen http://127.0.0.1:8000/
-```
+- `dp_wizard/app/` - Main application code (Shiny UI and server)
+- `dp_wizard/utils/` - Utility functions and code generators
+- `tests/` - Test suite
+- `requirements*.txt` - Python dependencies
 
-You can also [step through these tests](https://playwright.dev/python/docs/running-tests#debugging-tests) and see what the browser sees:
-```shell
-$ PWDEBUG=1 pytest -k test_app
-```
+#### Development Guidelines
 
-If Playwright fails in CI, we can still see what went wrong:
-- Scroll to the end of the CI log, to `actions/upload-artifact`.
-- Download the zipped artifact locally.
-- Inside the zipped artifact will be _another_ zip: `trace.zip`.
-- Don't unzip it! Instead, open it with [trace.playwright.dev](https://trace.playwright.dev/).
+- **Branch naming**: Use format `NNNN-short-description` where `NNNN` is the issue number
+- **Dependencies**: 
+  - Add developer-only dependencies in `requirements-dev.in`
+  - Add other dependencies in `requirements.in`
+  - Run `dependencies.py` after editing either file to update `pyproject.toml`
+- **Code style**: Pre-commit hooks are installed to enforce code quality
 
-### Release
+## Contributing
 
-- Make sure you're up to date, and have the git-ignored credentials file `.pypirc`.
-- Make one last feature branch:
-  - Run `changelog.py` to update the `CHANGELOG.md`.
-  - Then bump `dp_wizard/VERSION`, and add the new number at the top of the `CHANGELOG.md`.
-  - Push to github; open PR, with version number in name; merge PR.
-- `flit publish --pypirc .pypirc`
+We welcome contributions! Here are several ways to help:
 
-This project is configured so there are two different install possibilities from pypi:
-- `pip install dp_wizard` does not aggressively pin dependency versions. It is preferred if you're using `dp_wizard` as a library.
-- `pip install dp_wizard[app]` pins all dependencies, and will work more reliably for application users.
+1. **Feedback**: If DP Wizard is useful, [let us know](https://docs.google.com/forms/d/e/1FAIpQLScaGdKS-vj-RrM7SCV_lAwZmxQ2bOqFrAkyDp4djxTqkTkinA/viewform)
+2. **Report Issues**: Found a bug? [File an issue](https://github.com/opendp/dp-wizard/issues/new/choose)
+3. **Feature Requests**: Have an idea? [Submit a feature request](https://github.com/opendp/dp-wizard/issues/new/choose)
+4. **Pull Requests**: We welcome PRs! See [Development](#for-developers) above for setup instructions
 
-### Conventions
+### Contribution Guidelines
 
-Branch names should be of the form `NNNN-short-description`, where `NNNN` is the issue number being addressed.
+Before contributing, please note our project vision:
 
-Add developer-only dependencies in `requirements-dev.in`; Add other dependencies in `requirements.in`. After an edit to either file run `dependencies.py` to install the new dependency locally and update `pyproject.toml`.
+- **No algorithms in DP Wizard**: This project is a thin wrapper around the [OpenDP library](https://github.com/opendp/opendp/). New algorithms should be added to OpenDP, not here.
+- **Keep it simple**: The OpenDP library is rich, but DP Wizard exposes only a fraction to avoid overwhelming users.
+- **Model correct DP application**: We focus on demonstrating proper differential privacy practices.
 
-A Github [project board](https://github.com/orgs/opendp/projects/10/views/2) provides an overview of the issues and PRs.
-When PRs are [Ready for Review](https://github.com/orgs/opendp/projects/10/views/2?filterQuery=status%3A%22Ready+for+Review%22) they should be flagged as such so reviewers can find them.
+### Getting Help
 
-```mermaid
-graph TD
-    subgraph Pending
-        %% We only get one auto-add workflow with the free plan.
-        %% https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/adding-items-automatically
-        Issue-New
-        PR-New-or-Changes
-    end
-    %% subgraph In Progress
-        %% How should this be used?
-        %% Can it be automated
-    %% end
-    subgraph Ready for Review
-        PR-for-Review
-    end
-    subgraph In Review
-        PR-in-Review --> PR-Approved
-    end
-    subgraph Done
-        Issue-Closed
-        PR-Merged
-        PR-Closed
-    end
-    PR-New-or-Changes -->|manual| PR-for-Review
-    PR-for-Review -->|manual| PR-in-Review
-    Issue-New -->|auto| Issue-Closed
-    PR-New-or-Changes -->|auto| PR-Closed
-    PR-for-Review -->|auto| PR-Closed
-    PR-in-Review -->|auto| PR-Closed
-    PR-for-Review -->|manual| PR-New-or-Changes
-    PR-in-Review -->|auto| PR-New-or-Changes
-    PR-Approved -->|auto| PR-Merged
-```
-- For `manual` transitions, the status of the issue or PR will need to be updated by hand, either on the issue, or by dragging between columns on the board.
-- For `auto` transitions, some other action (for example, approving a PR) should trigger a [workflow](https://github.com/orgs/opendp/projects/10/workflows).
-- These are the only the states that matter. Whether PR is a draft or has assignees does not matter.
-- If we need anything more than this, we should consider a paid plan, so that we have access to more workflows.
+- **Office Hours**: Chat with us at our [online office hour](https://harvard.zoom.us/j/98058847683), usually Tuesdays and Thursdays at 11am Eastern
+- **Issues**: [Browse existing issues](https://github.com/opendp/dp-wizard/issues) or [create a new one](https://github.com/opendp/dp-wizard/issues/new/choose)
 
-## Other resources
+## Deployment
 
-2025-04-11: [Slides for 5 minute mini-talk on v0.3.0](https://docs.google.com/presentation/d/1g1c5ksG9sN8A_qWW9nFmFFZ6dSCkUAmL6_cUahi3VPA/edit#slide=id.g34c5f4bdc6a_0_0)
+DP Wizard Enhanced is a Python Shiny web application that requires a server to run. It **cannot** be deployed on GitHub Pages (which only hosts static sites).
 
-2024-12-13: [Blog post for initial release](https://opendp.org/blog/dp-wizard-easy-way-get-started-differential-privacy-and-opendp)
+For deployment options, see:
+- [Render Deployment Guide](README-RENDER.md) - Free tier available
+- [Railway Deployment Guide](README-RAILWAY.md) - $5/month credit
+- [Fly.io Deployment Guide](README-FLY.md) - Free tier available
+- [General Deployment Guide](DEPLOYMENT.md) - Overview of all options
+
+## Resources
+
+- **2025-04-11**: [Slides for 5 minute mini-talk on v0.3.0](https://docs.google.com/presentation/d/1g1c5ksG9sN8A_qWW9nFmFFZ6dSCkUAmL6_cUahi3VPA/edit#slide=id.g34c5f4bdc6a_0_0)
+- **2024-12-13**: [Blog post for initial release](https://opendp.org/blog/dp-wizard-easy-way-get-started-differential-privacy-and-opendp)
+- **OpenDP Documentation**: https://docs.opendp.org/
+- **Shiny for Python**: https://shiny.posit.co/py/
+
+## License
+
+See [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+DP Wizard Enhanced is built on the original [DP Wizard](https://github.com/opendp/dp-wizard) project by the OpenDP team, which builds on learnings from [DP Creator](https://github.com/opendp/dpcreator).
