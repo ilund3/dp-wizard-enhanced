@@ -4,6 +4,72 @@
 
 An enhanced version of DP Wizard that makes it easier to get started with Differential Privacy.
 
+---
+
+## 📄 Project Documentation
+
+**[📥 Download Full PDF Report](assets/DP_Wizard_Enhanced.pdf)** | *CS2080 Final Project - May 8, 2025*
+
+**Authors:** Isaac Lund, Brianna Chan, Yaying Liang Li, Shiloh Liu, Namat Noori
+
+### Introduction
+
+Differential Privacy (DP) is an increasingly-common framework for computing statistics in a way that hides the presence or absence of any singular individual's data, yet effectively communicating DP understandings and implications to better support data analysts remains a pressing need. Various studies have been conducted surrounding communication strategies around differential privacy, and a list of interfaces containing textual, visualization, and interactive elements have been designed. However, many of these tools fail to clearly bridge technical definitions with real-world decisions users must make. Our goal is to close this gap by implementing new, concrete interactive features in DP Wizard that directly reflect findings from privacy communication literature.
+
+Our project design objectives build on the original DP Wizard goals: (1) to compute simple differentially private statistics without requiring deep expertise in data privacy, and (2) to help users understand how different ε values affect accuracy. DP Wizard Enhanced extends these foundations with two new goals: (1) enabling data analysts to understand what ε means in practice by visualizing the privacy-utility tradeoff and tracking ε budget usage during exploratory workflows, and (2) empowering analysts to perform realistic, privacy-preserving analysis. This includes support for a wider variety of differentially private query types, the use of filters, and iterative adjustment of parameters throughout the analysis process.
+
+### Key Features & Enhancements
+
+#### 1. Privacy-Utility Tradeoff Visualization
+- Interactive ε slider that instantly updates epsilon label, graph, and text
+- Dual-axis visualization showing both accuracy and privacy risk
+- Color-coded histograms that transition to a "danger" zone when ε values exceed recommended thresholds
+- Plain-language explanations of adversarial risk
+
+#### 2. Privacy Budget Tracking
+- Real-time budget warnings when budget is low or exhausted
+- Visual tracking of remaining budget after each query
+- Support for iterative exploratory workflows
+
+#### 3. Enhanced Query Types
+- Support for Count, Mean, Median, Standard Deviation, Quantile, and Histogram queries
+- Filter support for more realistic analysis workflows
+- Iterative parameter adjustment throughout the analysis process
+
+#### 4. Improved Usability
+- User-friendly labels: "Privacy Budget," "Unit of Privacy," etc.
+- Tooltips and hints embedded throughout the interface
+- Uniform card layout with consistent color conventions (blue = accuracy, red = risk)
+- Navigation buttons allowing non-linear movement and flexibility
+
+### Research Foundation
+
+Our enhancements are grounded in privacy communication literature:
+
+- **Cummings et al. (2021)**: Found that users value DP when presented in terms that resonate with their privacy concerns. Descriptions must match what users care most about, providing transparency around how and why their data is protected.
+
+- **Dibia et al. (2024)**: Synthesized themes across user studies and interface evaluations, addressing the need for more specificity and support surrounding target expertise, budgeting, utility analyses, and correctness checking.
+
+- **Franzen et al. (2024)**: Explored communicating the privacy-utility trade-off and supporting informed data donation with privacy decision interfaces for differential privacy.
+
+### Usability Evaluation
+
+We conducted heuristic evaluation using Nielsen's 10 Usability Heuristics and informal user testing with four participants (two non-STEM and two STEM backgrounds). Key findings:
+
+- **Task 1 (Data Analyst Scenario)**: All participants rated the enhanced version more highly (scores 6-9/10). Non-technical users found the layout "intuitive" and tooltips "self-explanatory."
+
+- **Task 2 (Epsilon and Privacy Risk Exploration)**: Participants cited the visualization and textual summary components as most effective. One user noted: "Before this, I had no idea what ε was. But now I know that if it's low, my results are fuzzier, and if it's high, they're sharper but riskier."
+
+### Member Contributions
+
+- **Yaying**: Developed functionality for Count, Median, and Standard Deviation queries, including backend logic and UI integration
+- **Isaac**: Implemented the epsilon tradeoff visualization graph and led informal user evaluation based on Nielsen's usability heuristics
+- **Brianna**: Designed and implemented the privacy budget tracker, ensuring it reflected remaining budget after user confirms privacy budget for each query
+- **Namat**: Led user interface redesign, including implementing new color encoding for histograms to improve visual clarity and accessibility
+- **Shiloh**: Conducted literature review, led writing of final report, and ensured all arguments were well-grounded in prior work
+
+---
+
 ![DP Wizard Enhanced Demo](assets/DP-Demo.gif)
 
 ## What is DP Wizard?
